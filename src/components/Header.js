@@ -25,16 +25,53 @@ class Header extends React.Component {
     const { nameInput, loading } = this.state;
     return (
       <header data-testid="header-component">
+        <nav>
+          <ul>
+            <li>
+              <Link
+                to="/search"
+                data-testid="link-to-search"
+                className="text-decoration-n"
+              >
+                {' '}
+                Search
+                {' '}
+
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/favorites"
+                data-testid="link-to-favorites"
+                className="text-decoration-n"
+              >
+                {' '}
+                Favorites
+                {' '}
+
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/profile"
+                data-testid="link-to-profile"
+                className="text-decoration-n"
+              >
+                {' '}
+                Profile
+                {' '}
+
+              </Link>
+            </li>
+            <li>
+              <Link to="/" className="text-decoration-n"> Voltar </Link>
+            </li>
+          </ul>
+        </nav>
         <div>
-          <p data-testid="header-user-name">
+          <h3 className="header-username" data-testid="header-user-name">
             { loading ? <Loading /> : <h3>{ nameInput }</h3> }
-          </p>
-        </div>
-        <div>
-          <Link to="/search" data-testid="link-to-search"> Search </Link>
-          <Link to="/favorites" data-testid="link-to-favorites"> Favorites </Link>
-          <Link to="/profile" data-testid="link-to-profile"> Profile </Link>
-          <Link to="/"> Voltar </Link>
+          </h3>
         </div>
       </header>
     );
