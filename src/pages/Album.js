@@ -3,16 +3,21 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import getMusics from '../services/musicsAPI';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
+import Loading from './../components/Loading';
 
 class Album extends React.Component {
   state = {
+    loading: false,
     arrayMusics: [],
     dataAlbum: '',
     dataArtist: '',
+    favoritesMusics: [],
   }
 
   componentDidMount() {
     this.getMusicsFetch();
+    this.fetchFavoritesMusics();
   }
 
   getMusicsFetch = async () => {
@@ -26,9 +31,19 @@ class Album extends React.Component {
     });
   }
 
-  render() {
-    const { arrayMusics, dataAlbum, dataArtist } = this.state;
+  fetchFavoritesMusics = () => {
+    this.setState({
+      loading: true,
+    }, async () => this.setState({
+      favoritesMusics: await getFavoriteSongs(),
+      loading: false,
+    }));
+  }
 
+  render() {
+    const { loading, arrayMusics, dataAlbum, dataArtist,  favoritesMusics} = this.state;
+
+    if (loading) return <Loading />;
     return (
       <div data-testid="page-album">
         <Header />
@@ -56,6 +71,7 @@ class Album extends React.Component {
                     previewUrl={ previewUrl }
                     trackId={ trackId }
                     arrayMusics={ arrayMusics }
+                    favoritesMusics={ favoritesMusics }
                   />
                 </div>
               ))
@@ -69,7 +85,7 @@ class Album extends React.Component {
 Album.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
 };
