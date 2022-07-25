@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import getMusics from '../services/musicsAPI';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
-import Loading from './../components/Loading';
+import Loading from '../components/Loading';
 
 class Album extends React.Component {
   state = {
@@ -41,7 +41,7 @@ class Album extends React.Component {
   }
 
   render() {
-    const { loading, arrayMusics, dataAlbum, dataArtist,  favoritesMusics} = this.state;
+    const { loading, arrayMusics, dataAlbum, dataArtist, favoritesMusics } = this.state;
 
     if (loading) return <Loading />;
     return (
