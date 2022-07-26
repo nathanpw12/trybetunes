@@ -22,7 +22,6 @@ class Profile extends React.Component {
 
   handleUser = async () => {
     const user = await getUser();
-    console.log(user);
     this.setState({
       user,
     });
